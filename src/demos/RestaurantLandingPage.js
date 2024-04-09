@@ -9,6 +9,9 @@ import MainFeature2 from "components/features/TwoColSingleFeatureWithStats2.js";
 import TabGrid from "components/cards/TabCardGrid.js";
 import Footer from "components/footers/MiniCenteredFooter.js";
 import HeroImageSrc from "../assets/images/BreadAndHummus.jpg";
+import SecondHeroImage from "../assets/images/Pizza.jpg";
+import ContactUsForm from "components/forms/SimpleContactUs.js";
+import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
 
 import chefIconImageSrc from "images/chef-icon.svg";
 import celebrationIconImageSrc from "images/celebration-icon.svg";
@@ -47,71 +50,68 @@ export default () => {
         watchVideoButtonText="Channel Trailer"
       />
       <MainFeature
-        subheading={<Subheading>Established Since 2014</Subheading>}
+        subheading={<Subheading>Inception: 2019</Subheading>}
         heading={
           <>
-            We've been serving for
+            We've been creating for
             <wbr /> <HighlightedText>over 5 years.</HighlightedText>
           </>
         }
         description={
           <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            From a heartfelt expression of love in every dish to a global
+            culinary expedition, Namak Swadanusar embodies the journey from
+            passion to brand
             <br />
             <br />
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat.
+            celebrating, educating, and sharing the magic of traditional and
+            modern recipes with the world
           </Description>
         }
         buttonRounded={false}
         textOnLeft={false}
         primaryButtonText="Latest Offers"
-        imageSrc={
-          "https://images.unsplash.com/photo-1460306855393-0410f61241c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80"
-        }
+        imageSrc={SecondHeroImage}
         imageCss={imageCss}
         imageDecoratorBlob={true}
         imageDecoratorBlobCss={tw`left-1/2 -translate-x-1/2 md:w-32 md:h-32 opacity-25`}
       />
-      {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
-      <TabGrid
-        heading={
-          <>
-            Checkout our <HighlightedText>menu.</HighlightedText>
-          </>
-        }
-      />
+
       <Features
         heading={
           <>
-            Amazing <HighlightedText>Services.</HighlightedText>
+            Our <HighlightedText>Focus</HighlightedText>
           </>
         }
         cards={[
           {
             imageSrc: shopIconImageSrc,
-            title: "230+ Locations",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            title: "Recipes",
+            description:
+              "Where Every Recipe Tells a Story and Every Dish Brings the World to Your Table.",
             url: "https://google.com",
           },
           {
             imageSrc: chefIconImageSrc,
-            title: "Professional Chefs",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            title: "Techniques",
+            description:
+              "Unlock the Artistry of Cooking: Techniques That Transform Good into Gourmet.",
             url: "https://timerse.com",
           },
           {
             imageSrc: celebrationIconImageSrc,
-            title: "Birthday Catering",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
+            title: "Equipments",
+            description:
+              "From Whisk to Wok: Equip Your Culinary Dreams with the Perfect Kitchen Allies",
             url: "https://reddit.com",
           },
         ]}
         imageContainerCss={tw`p-2!`}
         imageCss={tw`w-20! h-20!`}
       />
-      <MainFeature2
+      {<BlogPreview />}
+      {<ContactUsForm />}
+      {/* <MainFeature2
         subheading={<Subheading>A Reputed Brand</Subheading>}
         heading={
           <>
@@ -141,7 +141,8 @@ export default () => {
         imageDecoratorBlob={true}
         imageDecoratorBlobCss={tw`left-1/2 md:w-32 md:h-32 -translate-x-1/2 opacity-25`}
         textOnLeft={true}
-      />
+      /> */}
+
       <Footer />
     </AnimationRevealPage>
   );
