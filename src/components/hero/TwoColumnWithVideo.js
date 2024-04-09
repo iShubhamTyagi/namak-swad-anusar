@@ -85,12 +85,12 @@ export default ({
               {/* <PrimaryButton as="a" href={primaryButtonUrl}>
                 {primaryButtonText}
               </PrimaryButton> */}
-              <WatchVideoButton onClick={toggleModal}>
+              {/* <WatchVideoButton onClick={toggleModal}>
                 <span className="playIconContainer">
                   <PlayIcon className="playIcon" />
                 </span>
                 <span className="playText">{watchVideoButtonText}</span>
-              </WatchVideoButton>
+              </WatchVideoButton> */}
             </Actions>
           </LeftColumn>
           <RightColumn>

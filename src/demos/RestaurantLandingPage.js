@@ -9,13 +9,8 @@ import MainFeature2 from "components/features/TwoColSingleFeatureWithStats2.js";
 import TabGrid from "components/cards/TabCardGrid.js";
 import Footer from "components/footers/MiniCenteredFooter.js";
 import HeroImageSrc from "../assets/images/BreadAndHummus.jpg";
-import SecondHeroImage from "../assets/images/Pizza.jpg";
 import ContactUsForm from "components/forms/SimpleContactUs.js";
 import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
-
-import chefIconImageSrc from "images/chef-icon.svg";
-import celebrationIconImageSrc from "images/celebration-icon.svg";
-import shopIconImageSrc from "images/shop-icon.svg";
 
 export default () => {
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
@@ -28,14 +23,14 @@ export default () => {
       <Hero
         heading={
           <>
-            Savour the spice of life at{" "}
-            <HighlightedText>Namak Swadanusar</HighlightedText>
+            Namak Swadanusar
+            {/* <HighlightedText>Namak Swadanusar</HighlightedText> */}
           </>
         }
         description={
           <Description>
-            Embark on a culinary journey with us, where traditional Indian
-            cooking meets the world’s flavors.
+            Savour the spice of life at and embark on a culinary journey with
+            us, where traditional Indian cooking meets the world’s flavors.
             <br />
             <br />
             From the bustling streets of Tripura to the heart of Paris, our
@@ -49,66 +44,7 @@ export default () => {
         primaryButtonText="Order Now"
         watchVideoButtonText="Channel Trailer"
       />
-      <MainFeature
-        subheading={<Subheading>Inception: 2019</Subheading>}
-        heading={
-          <>
-            We've been creating for
-            <wbr /> <HighlightedText>over 5 years.</HighlightedText>
-          </>
-        }
-        description={
-          <Description>
-            From a heartfelt expression of love in every dish to a global
-            culinary expedition, Namak Swadanusar embodies the journey from
-            passion to brand
-            <br />
-            <br />
-            celebrating, educating, and sharing the magic of traditional and
-            modern recipes with the world
-          </Description>
-        }
-        buttonRounded={false}
-        textOnLeft={false}
-        primaryButtonText="Latest Offers"
-        imageSrc={SecondHeroImage}
-        imageCss={imageCss}
-        imageDecoratorBlob={true}
-        imageDecoratorBlobCss={tw`left-1/2 -translate-x-1/2 md:w-32 md:h-32 opacity-25`}
-      />
 
-      <Features
-        heading={
-          <>
-            Our <HighlightedText>Focus</HighlightedText>
-          </>
-        }
-        cards={[
-          {
-            imageSrc: shopIconImageSrc,
-            title: "Recipes",
-            description:
-              "Where Every Recipe Tells a Story and Every Dish Brings the World to Your Table.",
-            url: "https://google.com",
-          },
-          {
-            imageSrc: chefIconImageSrc,
-            title: "Techniques",
-            description:
-              "Unlock the Artistry of Cooking: Techniques That Transform Good into Gourmet.",
-            url: "https://timerse.com",
-          },
-          {
-            imageSrc: celebrationIconImageSrc,
-            title: "Equipments",
-            description:
-              "From Whisk to Wok: Equip Your Culinary Dreams with the Perfect Kitchen Allies",
-            url: "https://reddit.com",
-          },
-        ]}
-        imageContainerCss={tw`p-2!`}
-        imageCss={tw`w-20! h-20!`}
-      />
       {<BlogPreview />}
       {<ContactUsForm />}
       {/* <MainFeature2

@@ -21,7 +21,7 @@ const ThreeColumn = tw.div`flex flex-col items-center lg:items-stretch lg:flex-r
 const Column = tw.div`mt-24 lg:w-1/3`;
 
 const HeadingInfoContainer = tw.div`flex flex-col items-center`;
-const HeadingDescription = tw.p`mt-4 font-medium text-gray-600 text-center max-w-sm`;
+const HeadingDescription = tw.p`font-sans mt-4 font-medium text-gray-600 text-center max-w-sm`;
 
 const Card = tw.div`lg:mx-4 xl:mx-8 max-w-sm flex flex-col h-full`;
 const Image = styled.div((props) => [

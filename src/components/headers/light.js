@@ -78,8 +78,9 @@ export default ({
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">About</NavLink>
-      <NavLink href="/#">Blog</NavLink>
+      <NavLink href="/#">Home</NavLink>
+      <NavLink href="/#">Recipes</NavLink>
+      <NavLink href="/#">Techniques</NavLink>
       <NavLink href="/#">Contact Us</NavLink>
       {/* <NavLink href="/#" tw="lg:ml-12!">
         Login
@@ -97,7 +98,6 @@ export default ({
   const defaultLogoLink = (
     <LogoLink href="/">
       <img src={logo} alt="logo" />
-      Namak Swadanusar by Sourajit Das
     </LogoLink>
   );
 
