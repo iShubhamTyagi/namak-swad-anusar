@@ -6,13 +6,17 @@ const BlogContext = createContext();
 // Create a provider component
 export function BlogProvider({ children }) {
   const [posts, setPosts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(0);
 
   useEffect(() => {
-    console.log(posts);
-  }, [posts]);
+    console.log("This is posts -->" + posts);
+    console.log("This is current posts -->" + currentPost);
+  }, [posts, currentPost]);
 
   return (
-    <BlogContext.Provider value={[posts, setPosts]}>
+    <BlogContext.Provider
+      value={[posts, setPosts, currentPost, setCurrentPost]}
+    >
       {children}
     </BlogContext.Provider>
   );

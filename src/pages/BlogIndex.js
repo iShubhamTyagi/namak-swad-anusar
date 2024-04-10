@@ -54,9 +54,14 @@ export default ({}) => {
   const [visible, setVisible] = useState(7);
 
   const [blogPosts, setBlogPosts] = useBlog([]);
-  const { currentPosts, setCurrentPost } = useBlog();
+  const [currentPostId, setCurrentPostId] = useBlog(null);
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
+  };
+
+  const handlePostClick = (postId) => {
+    setCurrentPostId(postId);
+    // navigate to the BlogPage
   };
 
   useEffect(() => {
@@ -101,7 +106,7 @@ export default ({}) => {
 
   useEffect(() => {
     if (blogPosts[0] && blogPosts[0].tags) {
-      console.log(blogPosts[0].tags);
+      console.log("Blog Posts --> " + blogPosts);
     }
   }, [blogPosts && blogPosts.length > 0]);
 
@@ -118,7 +123,13 @@ export default ({}) => {
               blogPosts?.length > 0 &&
               blogPosts.slice(0, visible).map((post, index) => (
                 <PostContainer key={index} featured={post.featured}>
-                  <Post className="group" as={Link} to={`/blog/${post.id}`}>
+                  <Post
+                    className="group"
+                    as={Link}
+                    to={`/blog/${post.id}`}
+                    key={post.id}
+                    onClick={() => handlePostClick(post.id)}
+                  >
                     <Image imageSrc={post.thumbnailUrl} />
                     <Info>
                       <Category>{post.category}</Category>
