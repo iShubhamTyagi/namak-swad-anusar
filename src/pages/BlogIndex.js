@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
 import Header from "components/headers/light.js";
-import Footer from "components/footers/FiveColumnWithInputForm.js";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton } from "components/misc/Buttons";
 
@@ -14,7 +13,7 @@ const Heading = tw(SectionHeading)`text-gray-900`;
 const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
-  ${props =>
+  ${(props) =>
     props.featured &&
     css`
       ${tw`w-full!`}
@@ -34,7 +33,10 @@ const PostContainer = styled.div`
 `;
 const Post = tw.div`cursor-pointer flex flex-col bg-gray-100 rounded-lg`;
 const Image = styled.div`
-  ${props => css`background-image: url("${props.imageSrc}");`}
+  ${(props) =>
+    css`
+      background-image: url("${props.imageSrc}");
+    `}
   ${tw`h-64 w-full bg-cover bg-center rounded-t-lg`}
 `;
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
@@ -58,32 +60,27 @@ export default ({
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       url: "https://timerse.com",
-      featured: true
+      featured: true,
     },
     getPlaceholderPost(),
     getPlaceholderPost(),
     getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost()
-  ]
+  ],
 }) => {
   const [visible, setVisible] = useState(7);
   const onLoadMoreClick = () => {
-    setVisible(v => v + 6);
+    setVisible((v) => v + 6);
   };
+
+  useEffect(() => {
+    fetch("https://myshelter00.wordpress.com/wp-json/wp/v2/posts")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // Do something with your posts data
+      })
+      .catch((error) => console.error("Error fetching posts:", error));
+  }, []);
+
   return (
     <AnimationRevealPage>
       <Header />
@@ -101,7 +98,9 @@ export default ({
                     <Category>{post.category}</Category>
                     <CreationDate>{post.date}</CreationDate>
                     <Title>{post.title}</Title>
-                    {post.featured && post.description && <Description>{post.description}</Description>}
+                    {post.featured && post.description && (
+                      <Description>{post.description}</Description>
+                    )}
                   </Info>
                 </Post>
               </PostContainer>
@@ -109,12 +108,13 @@ export default ({
           </Posts>
           {visible < posts.length && (
             <ButtonContainer>
-              <LoadMoreButton onClick={onLoadMoreClick}>Load More</LoadMoreButton>
+              <LoadMoreButton onClick={onLoadMoreClick}>
+                Load More
+              </LoadMoreButton>
             </ButtonContainer>
           )}
         </ContentWithPaddingXl>
       </Container>
-      <Footer />
     </AnimationRevealPage>
   );
 };
@@ -127,5 +127,5 @@ const getPlaceholderPost = () => ({
   title: "Visit the beautiful Alps in Switzerland",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  url: "https://reddit.com"
+  url: "https://reddit.com",
 });

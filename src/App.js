@@ -2,6 +2,7 @@ import React from "react";
 import GlobalStyles from "styles/GlobalStyles";
 import "./assets/fonts/fonts.css";
 import { css } from "styled-components/macro"; //eslint-disable-line
+import BlogsPage from "../src/components/blogs/ThreeColSimpleWithImageAndDashedBorder";
 
 /*
  * This is the entry point component of this project. You can change the below exported default App component to any of
@@ -88,6 +89,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 // import AgencyLandingPage from "demos/AgencyLandingPage.js";
 // import SaaSProductLandingPage from "demos/SaaSProductLandingPage.js";
 import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
+import Footer from "components/footers/MiniCenteredFooter.js";
 // import ServiceLandingPage from "demos/ServiceLandingPage.js";
 // import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
 
@@ -97,7 +99,7 @@ import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 // import PricingPage from "pages/Pricing.js";
 // import AboutUsPage from "pages/AboutUs.js";
 // import ContactUsPage from "pages/ContactUs.js";
-// import BlogIndexPage from "pages/BlogIndex.js";
+import BlogIndexPage from "pages/BlogIndex.js";
 // import TermsOfServicePage from "pages/TermsOfService.js";
 // import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
 
@@ -124,9 +126,12 @@ export default function App() {
             element={<ComponentRenderer />}
           />
           <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/blog" element={<BlogIndexPage />} />
           <Route path="/" element={<RestaurantLandingPage />} />
         </Routes>
       </Router>
+
+      <Footer />
     </>
   );
 }

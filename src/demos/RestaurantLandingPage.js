@@ -7,7 +7,7 @@ import Features from "components/features/ThreeColSimple.js";
 import MainFeature from "components/features/TwoColWithButton.js";
 import MainFeature2 from "components/features/TwoColSingleFeatureWithStats2.js";
 import TabGrid from "components/cards/TabCardGrid.js";
-import Footer from "components/footers/MiniCenteredFooter.js";
+
 import HeroImageSrc from "../assets/images/BreadAndHummus.jpg";
 import ContactUsForm from "components/forms/SimpleContactUs.js";
 import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
@@ -78,8 +78,6 @@ export default () => {
         imageDecoratorBlobCss={tw`left-1/2 md:w-32 md:h-32 -translate-x-1/2 opacity-25`}
         textOnLeft={true}
       /> */}
-
-      <Footer />
     </AnimationRevealPage>
   );
 };
