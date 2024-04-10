@@ -6,7 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
-import logo from "../../images/logo.svg";
+import logo from "../../assets/images/Logo.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 
@@ -79,7 +79,7 @@ export default ({
   const defaultLinks = [
     <NavLinks key={1}>
       <NavLink href="/#">Home</NavLink>
-      <NavLink href="/blog">Recipes</NavLink>
+      <NavLink href="/">Recipes</NavLink>
       <NavLink href="/#">Techniques</NavLink>
       <NavLink href="/#">Contact Us</NavLink>
       {/* <NavLink href="/#" tw="lg:ml-12!">

@@ -53,11 +53,7 @@ const DecoratorBlob2 = tw(
 
 export default ({
   subheading = "Blog",
-  heading = (
-    <>
-      We Love <span tw="text-primary-500">Writing.</span>
-    </>
-  ),
+  heading = <>Learn With Me</>,
   description = "Explore the Essence of Cooking: Dive into Recipes, Master Techniques, and Discover Essential Equipment",
 }) => {
   const blogPosts = [
