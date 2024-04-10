@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -8,7 +8,12 @@ import Header from "components/headers/light.js";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton } from "components/misc/Buttons";
 import { Link } from "react-router-dom";
-import { useBlog } from "../../src/components/context/BlogContext";
+import {
+  useBlog,
+  useBlogUpdate,
+  BlogContext,
+  BlogUpdateContext,
+} from "../../src/components/context/BlogContext";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -52,15 +57,19 @@ const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
 export default ({}) => {
   const [visible, setVisible] = useState(7);
+  // const { blogPosts: blogPosts, currentPost: currentPostId } = useBlog();
 
-  const [blogPosts, setBlogPosts] = useBlog([]);
-  const [currentPostId, setCurrentPostId] = useBlog(null);
+  // const { setPosts: setBlogPosts, setCurrentPost: setCurrentPostId } =
+  //   useBlogUpdate();
+  const { setBlogPosts, setCurrentPost } = useBlogUpdate();
+  const { blogPosts, currentPost } = useBlog();
+
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
 
   const handlePostClick = (postId) => {
-    setCurrentPostId(postId);
+    setCurrentPost(postId);
     // navigate to the BlogPage
   };
 
@@ -104,14 +113,14 @@ export default ({}) => {
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
-  useEffect(() => {
-    if (blogPosts[0] && blogPosts[0].tags) {
-      console.log("Blog Posts --> " + blogPosts);
-    }
-  }, [blogPosts && blogPosts.length > 0]);
+  // useEffect(() => {
+  //   if (blogPosts[0] && blogPosts[0].tags) {
+  //     console.log("Blog Posts --> " + blogPosts);
+  //   }
+  // }, [blogPosts && blogPosts.length > 0]);
 
   return (
-    <AnimationRevealPage>
+    <AnimationRevealPage disabled>
       <Header />
       <Container>
         <ContentWithPaddingXl>
@@ -143,7 +152,7 @@ export default ({}) => {
                 </PostContainer>
               ))}
           </Posts>
-          {visible < blogPosts.length && (
+          {visible < blogPosts?.length && (
             <ButtonContainer>
               <LoadMoreButton onClick={onLoadMoreClick}>
                 Load More

@@ -1,32 +1,27 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Create a context
-const BlogContext = createContext();
+// Creating separate contexts for reading and updating state
+export const BlogContext = createContext();
+export const BlogUpdateContext = createContext();
 
-// Create a provider component
-export function BlogProvider({ children }) {
-  const [posts, setPosts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(0);
+export const BlogProvider = ({ children }) => {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(null);
 
   useEffect(() => {
-    console.log("This is posts -->" + posts);
-    console.log("This is current posts -->" + currentPost);
-  }, [posts, currentPost]);
+    console.log("Blog posts updated", blogPosts);
+    console.log("Current post updated", currentPost);
+  }, [blogPosts, currentPost]);
 
   return (
-    <BlogContext.Provider
-      value={[posts, setPosts, currentPost, setCurrentPost]}
-    >
-      {children}
+    <BlogContext.Provider value={{ blogPosts, currentPost }}>
+      <BlogUpdateContext.Provider value={{ setBlogPosts, setCurrentPost }}>
+        {children}
+      </BlogUpdateContext.Provider>
     </BlogContext.Provider>
   );
-}
+};
 
-// Create a hook to use the blog context
-export function useBlog() {
-  const context = useContext(BlogContext);
-  if (!context) {
-    throw new Error("useBlog must be used within a BlogProvider");
-  }
-  return context;
-}
+export const useBlog = () => useContext(BlogContext);
+
+export const useBlogUpdate = () => useContext(BlogUpdateContext);

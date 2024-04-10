@@ -33,13 +33,14 @@ const Description = tw(
 const PrimaryButton = tw(
   PrimaryButtonBase
 )`mt-8 inline-block w-56 tracking-wide text-center py-5`;
+const ImageColumn = tw(Column)`ml-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-32`;
 const FeatureList = tw.ul`mt-12 leading-loose`;
 const Feature = tw.li`flex items-center`;
 const FeatureIcon = tw(CheckboxIcon)`w-5 h-5 text-primary-500`;
 const FeatureText = tw.p`ml-2 font-medium text-gray-700`;
-const ImageColumn = tw(Column)`ml-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-32`;
+
 const ImageContainer = tw.div`relative z-40 transform xl:-translate-x-24 xl:-translate-y-16`;
-const Image = tw.img`max-w-full w-96 rounded-lg sm:rounded-lg relative z-20 shadow-2xl`;
+const Image = tw.img`max-w-full w-96 rounded-lg sm:rounded-lg relative z-20 shadow-2xl `;
 const Offsetbackground = tw.div`absolute inset-0 bg-gray-300 rounded xl:-mb-8`;
 const ImageDecoratorBlob = styled(SvgDecoratorBlob1)`
   ${tw`pointer-events-none z-10 absolute right-0 bottom-0 transform translate-x-10 translate-y-10 h-32 w-32 opacity-25 text-gray-900 fill-current`}
@@ -103,7 +104,7 @@ export default ({
             <ImageColumn>
               <ImageContainer>
                 <Image src={imageSrc} />
-                {imageDecoratorBlob && <ImageDecoratorBlob />}
+                {/* {imageDecoratorBlob && <ImageDecoratorBlob />} */}
                 {/* <Testimonial>
                   <QuotesLeftIcon />
                   <Quote>{testimonial.quote}</Quote>

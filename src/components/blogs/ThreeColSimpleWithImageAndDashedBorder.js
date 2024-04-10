@@ -23,7 +23,7 @@ const Column = tw.div`mt-24 lg:w-1/3`;
 const HeadingInfoContainer = tw.div`flex flex-col items-center`;
 const HeadingDescription = tw.p`font-sans mt-4 font-medium text-gray-600 text-center max-w-sm`;
 
-const Card = tw.div`lg:mx-4 xl:mx-8 max-w-sm flex flex-col h-full`;
+const Card = tw.div`lg:mx-4 xl:mx-8 max-w-sm flex flex-col h-full shadow-2xl`;
 const Image = styled.div((props) => [
   `background-image: url("${props.imageSrc}");`,
   tw`bg-cover bg-center h-80 lg:h-64 rounded rounded-b-none`,
