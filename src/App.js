@@ -90,6 +90,7 @@ import BlogsPage from "../src/components/blogs/ThreeColSimpleWithImageAndDashedB
 // import SaaSProductLandingPage from "demos/SaaSProductLandingPage.js";
 import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 import Footer from "components/footers/MiniCenteredFooter.js";
+import BlogPage from "../src/pages/BlogPage";
 // import ServiceLandingPage from "demos/ServiceLandingPage.js";
 // import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
 
@@ -107,6 +108,7 @@ import ComponentRenderer from "ComponentRenderer.js";
 import ThankYouPage from "ThankYouPage.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BlogProvider } from "../src/components/context/BlogContext";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -116,19 +118,25 @@ export default function App() {
     <>
       <GlobalStyles />
       <Router>
-        <Routes>
-          <Route
-            path="/components/:type/:subtype/:name"
-            element={<ComponentRenderer />}
-          />
-          <Route
-            path="/components/:type/:name"
-            element={<ComponentRenderer />}
-          />
-          <Route path="/thank-you" element={<ThankYouPage />} />
-          <Route path="/blog" element={<BlogIndexPage />} />
-          <Route path="/" element={<RestaurantLandingPage />} />
-        </Routes>
+        <BlogProvider>
+          <Routes>
+            <Route
+              path="/components/:type/:subtype/:name"
+              element={<ComponentRenderer />}
+            />
+            <Route
+              path="/components/:type/:name"
+              element={<ComponentRenderer />}
+            />
+            <Route path="/thank-you" element={<ThankYouPage />} />
+            <Route path="/blogs" element={<BlogIndexPage />} />
+            <Route
+              path="/blog/:id"
+              render={(props) => <BlogPage {...props} />}
+            />
+            <Route path="/" element={<RestaurantLandingPage />} />
+          </Routes>
+        </BlogProvider>
       </Router>
 
       <Footer />

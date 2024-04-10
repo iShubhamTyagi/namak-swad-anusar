@@ -7,6 +7,8 @@ import { css } from "styled-components/macro";
 import Header from "components/headers/light.js";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton } from "components/misc/Buttons";
+import { Link } from "react-router-dom";
+import { useBlog } from "../../src/components/context/BlogContext";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
@@ -51,7 +53,8 @@ const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 export default ({}) => {
   const [visible, setVisible] = useState(7);
 
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, setBlogPosts] = useBlog([]);
+  const { currentPosts, setCurrentPost } = useBlog();
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
@@ -112,10 +115,10 @@ export default ({}) => {
           </HeadingRow>
           <Posts>
             {blogPosts &&
-              blogPosts.length > 0 &&
+              blogPosts?.length > 0 &&
               blogPosts.slice(0, visible).map((post, index) => (
                 <PostContainer key={index} featured={post.featured}>
-                  <Post className="group" as="a" href={post.url}>
+                  <Post className="group" as={Link} to={`/blog/${post.id}`}>
                     <Image imageSrc={post.thumbnailUrl} />
                     <Info>
                       <Category>{post.category}</Category>
