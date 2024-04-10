@@ -10,7 +10,7 @@ import { PrimaryButton } from "components/misc/Buttons";
 
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900`;
-const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
+const Posts = tw.div`font-sans mt-6 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
   ${(props) =>
@@ -48,38 +48,59 @@ const Description = tw.div``;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
-export default ({
-  headingText = "Blog Posts",
-  posts = [
-    {
-      imageSrc:
-        "https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-      category: "Travel Tips",
-      date: "April 21, 2020",
-      title: "Safely Travel in Foreign Countries",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      url: "https://timerse.com",
-      featured: true,
-    },
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-    getPlaceholderPost(),
-  ],
-}) => {
+export default ({}) => {
   const [visible, setVisible] = useState(7);
+
+  const [blogPosts, setBlogPosts] = useState([]);
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
 
   useEffect(() => {
-    fetch("https://myshelter00.wordpress.com/wp-json/wp/v2/posts")
+    fetch(
+      "https://public-api.wordpress.com/rest/v1.1/sites/myshelter00.wordpress.com/posts"
+    )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Do something with your posts data
+        console.log(data);
+        const fetchedPosts = data.posts.map((post) => {
+          let thumbnailUrl = "";
+          if (post.attachments) {
+            const firstAttachmentId = Object.keys(post.attachments)[0];
+            const firstAttachment = post.attachments[firstAttachmentId];
+            thumbnailUrl = firstAttachment.URL;
+          }
+
+          return {
+            id: post.ID,
+            title: post.title,
+            url: post.URL,
+            attachments: post.attachments,
+            excerpt:
+              post.excerpt.length > 100
+                ? post.excerpt.substring(
+                    0,
+                    post.excerpt.lastIndexOf(" ", 100)
+                  ) + "..."
+                : post.excerpt,
+            guid: post.guid,
+            modified: post.modified,
+            shorturl: post.shorturl,
+            tags: post.tags,
+            content: post.content,
+            thumbnailUrl: thumbnailUrl,
+          };
+        });
+        setBlogPosts(fetchedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
+
+  useEffect(() => {
+    if (blogPosts[0] && blogPosts[0].tags) {
+      console.log(blogPosts[0].tags);
+    }
+  }, [blogPosts && blogPosts.length > 0]);
 
   return (
     <AnimationRevealPage>
@@ -87,26 +108,28 @@ export default ({
       <Container>
         <ContentWithPaddingXl>
           <HeadingRow>
-            <Heading>{headingText}</Heading>
+            <Heading>Blog Posts</Heading>
           </HeadingRow>
           <Posts>
-            {posts.slice(0, visible).map((post, index) => (
-              <PostContainer key={index} featured={post.featured}>
-                <Post className="group" as="a" href={post.url}>
-                  <Image imageSrc={post.imageSrc} />
-                  <Info>
-                    <Category>{post.category}</Category>
-                    <CreationDate>{post.date}</CreationDate>
-                    <Title>{post.title}</Title>
-                    {post.featured && post.description && (
-                      <Description>{post.description}</Description>
-                    )}
-                  </Info>
-                </Post>
-              </PostContainer>
-            ))}
+            {blogPosts &&
+              blogPosts.length > 0 &&
+              blogPosts.slice(0, visible).map((post, index) => (
+                <PostContainer key={index} featured={post.featured}>
+                  <Post className="group" as="a" href={post.url}>
+                    <Image imageSrc={post.thumbnailUrl} />
+                    <Info>
+                      <Category>{post.category}</Category>
+                      <CreationDate>{post.modified}</CreationDate>
+                      <Title>{post.title}</Title>
+                      {post.excerpt && (
+                        <Description>{post.excerpt}</Description>
+                      )}
+                    </Info>
+                  </Post>
+                </PostContainer>
+              ))}
           </Posts>
-          {visible < posts.length && (
+          {visible < blogPosts.length && (
             <ButtonContainer>
               <LoadMoreButton onClick={onLoadMoreClick}>
                 Load More
@@ -118,14 +141,3 @@ export default ({
     </AnimationRevealPage>
   );
 };
-
-const getPlaceholderPost = () => ({
-  imageSrc:
-    "https://images.unsplash.com/photo-1418854982207-12f710b74003?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
-  category: "Travel Guide",
-  date: "April 19, 2020",
-  title: "Visit the beautiful Alps in Switzerland",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  url: "https://reddit.com",
-});
