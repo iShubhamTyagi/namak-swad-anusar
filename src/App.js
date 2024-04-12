@@ -130,10 +130,7 @@ export default function App() {
             />
             <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/blogs" element={<BlogIndexPage />} />
-            <Route
-              path="/blog/:id"
-              render={(props) => <BlogPage {...props} />}
-            />
+            <Route path="/blog/:id" element={<BlogPage />} />
             <Route path="/" element={<RestaurantLandingPage />} />
           </Routes>
         </BlogProvider>

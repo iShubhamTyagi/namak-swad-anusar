@@ -1,30 +1,31 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import tw from "twin.macro";
 import { useBlog } from "../components/context/BlogContext.js";
 
-const PageContainer = tw.div`p-8`;
-const Title = tw.h1`text-2xl font-bold mb-4`;
-const Image = tw.img`w-full h-auto mb-4`;
-const Category = tw.p`text-sm text-gray-500 mb-2`;
-const Date = tw.p`text-sm text-gray-500 mb-2`;
-const Excerpt = tw.p`text-base text-gray-700`;
+const PageContainer = tw.div`p-4 md:p-8`;
+const Title = tw.h1`text-xl md:text-3xl font-bold mb-4`;
+const Category = tw.p`text-xs md:text-sm text-gray-500 mb-2`;
+const Date = tw.p`text-xs md:text-sm text-gray-500 mb-2`;
+const ContentContainer = tw.div`prose prose-sm md:prose-lg lg:prose-xl mx-auto`;
 
-function BlogPage({ posts }) {
-  const { currentPost } = useBlog();
-  console.log(currentPost);
+function BlogPage() {
+  const { blogPosts, currentPost } = useBlog();
+  console.log("BlogPage is being rendered");
+  console.log("currentPost", currentPost);
+  console.log("blogPosts", blogPosts);
 
-  if (!currentPost) {
-    return <div>Post not found</div>;
-  }
+  const post = blogPosts?.find((post) => post.id === currentPost);
+
+  if (!post) return <PageContainer>No post found.</PageContainer>;
 
   return (
     <PageContainer>
-      <Title>{currentPost.title}</Title>
-      <Image src={currentPost.thumbnailUrl} alt={currentPost.title} />
-      <Category>{currentPost.category}</Category>
-      <Date>{currentPost.modified}</Date>
-      <Excerpt>{currentPost.excerpt}</Excerpt>
+      <Title>{post.title}</Title>
+      <Date>{post.modified}</Date>
+      <Category>{post.category}</Category>
+      <ContentContainer
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      ></ContentContainer>
     </PageContainer>
   );
 }
