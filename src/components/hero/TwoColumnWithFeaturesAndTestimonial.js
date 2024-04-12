@@ -21,15 +21,14 @@ import { ReactComponent as SvgDecoratorBlob1 } from "images/dot-pattern.svg";
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
 const Column = tw.div``;
-const TextColumn = tw(
-  Column
-)`mr-auto lg:mr-0 max-w-lg lg:max-w-xl xl:max-w-2xl`;
+const TextColumn = tw(Column)`lg:w-2/3`;
 const Heading = tw(
   SectionHeading
-)`text-left text-primary-900 leading-snug xl:text-7xl pb-0 mb-4`;
+)`text-right text-primary-900 leading-snug xl:text-7xl pb-0 mb-4`;
+const Byline = tw.p`text-right text-base xl:text-4xl`;
 const Description = tw(
   SectionDescription
-)`mt-4 lg:text-base text-gray-700 max-w-lg`;
+)`lg:max-w-none text-gray-700 text-xl text-left mr-0`;
 const PrimaryButton = tw(
   PrimaryButtonBase
 )`mt-8 inline-block w-56 tracking-wide text-center py-5`;
@@ -52,7 +51,6 @@ const QuotesLeftIcon = tw(
 const Quote = tw.blockquote``;
 const CustomerName = tw.p`mt-4 font-bold`;
 const CustomerCompany = tw.p`mt-1 text-sm text-gray-500`;
-const Byline = tw.p`text-right text-base xl:text-4xl`;
 
 export default ({
   heading = "Better, Faster and Cheaper Cloud.",
@@ -79,7 +77,7 @@ export default ({
     <NavLinks key={1}>
       <NavLink href="/#">About</NavLink>
       <NavLink href="/blogs">Blog</NavLink>
-      <NavLink href="/#">Contact Us</NavLink>
+      <NavLink href="/#">Contact</NavLink>
     </NavLinks>,
     <NavLinks key={2}>
       {/* <NavLink href="/#" tw="lg:ml-12!">

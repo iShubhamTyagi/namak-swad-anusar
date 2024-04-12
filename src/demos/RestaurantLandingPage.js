@@ -3,10 +3,6 @@ import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Hero from "components/hero/TwoColumnWithFeaturesAndTestimonial";
-import Features from "components/features/ThreeColSimple.js";
-import MainFeature from "components/features/TwoColWithButton.js";
-import MainFeature2 from "components/features/TwoColSingleFeatureWithStats2.js";
-import TabGrid from "components/cards/TabCardGrid.js";
 import Panel from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
 import HeroImageSrc from "../assets/images/Sourajit.svg";
 import ContactUsForm from "components/forms/SimpleContactUs.js";
@@ -30,11 +26,12 @@ export default () => {
         description={
           <Description>
             Welcome to my culinary world, where every dish tells a story, and
-            every flavour carries a legacy.
+            every flavour carries a legacy!
             <br />
             <br />
-            Embracing the art of cooking is not just about feeding oneself; it's
-            a fundamental skill for survival and independence.
+            Embracing the art of cooking is not just about feeding oneself;
+            <br />
+            it's a fundamental skill for survival and independence.
             <br />
             <br />
             Recognizing this, I've dedicated myself to demystifying the kitchen,

@@ -11,8 +11,6 @@ import { Link } from "react-router-dom";
 import {
   useBlog,
   useBlogUpdate,
-  BlogContext,
-  BlogUpdateContext,
 } from "../../src/components/context/BlogContext";
 
 const HeadingRow = tw.div`flex`;
@@ -57,12 +55,9 @@ const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
 export default ({}) => {
   const [visible, setVisible] = useState(7);
-  // const { blogPosts: blogPosts, currentPost: currentPostId } = useBlog();
 
-  // const { setPosts: setBlogPosts, setCurrentPost: setCurrentPostId } =
-  //   useBlogUpdate();
   const { setBlogPosts, setCurrentPost } = useBlogUpdate();
-  const { blogPosts, currentPost } = useBlog();
+  const { blogPosts } = useBlog();
 
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
@@ -96,12 +91,16 @@ export default ({}) => {
             excerpt:
               post.excerpt.length > 100
                 ? post.excerpt.substring(
-                    0,
+                    3,
                     post.excerpt.lastIndexOf(" ", 100)
                   ) + "..."
                 : post.excerpt,
             guid: post.guid,
-            modified: post.modified,
+            modified: new Date(post.modified).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }),
             shorturl: post.shorturl,
             tags: post.tags,
             content: post.content,
