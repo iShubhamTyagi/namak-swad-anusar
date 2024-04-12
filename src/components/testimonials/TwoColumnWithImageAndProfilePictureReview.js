@@ -17,6 +17,8 @@ import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-
 import Pizza from "../../assets/images/Pizza2.jpg";
 import BananaBread from "../../assets/images/BananaBread.jpg";
 import JalJeera from "../../assets/images/Jaljeera.jpg";
+import QuinoaBowl from "../../assets/images/QuinoaBowl.jpg";
+import CremeBrulee from "../../assets/images/CremeBrulee.jpg";
 
 import "slick-carousel/slick/slick.css";
 
@@ -79,8 +81,8 @@ const DecoratorBlob2 = tw(
 
 export default ({
   subheading = "Started in 2019",
-  heading = "My journey,",
-  description = "grounded in self-taught experiences and a boundless passion for food, has led me to explore the rich tapestry of Indian cuisine alongside the diverse flavours from around the globe. In this space, you'll find recipes that are more than just instructions; they're invitations to explore, experiment, and enjoy the process of creating something beautiful and delicious.Each recipe on my blog is crafted to be easy to follow, ensuring you can easily achieve fantastic results. From Mumbai's bustling streets to Tuscany's tranquil countryside, our culinary adventure will be vast and varied.",
+  heading = "As a self-taught chef,",
+  description = "I understand the importance of approachability in cooking. Each recipe has been tried and tested in my kitchen, ensuring that you're guided by hands that have learned through trial and success. You'll learn different techniques that not only aim to perfect dishes but also teach the science behind what makes them work. Join me as we embark on this flavorful journey, learning and growing with each dish we create. ",
   testimonials = null,
   textOnLeft = false,
 }) => {
@@ -90,26 +92,33 @@ export default ({
    */
   const defaultTestimonials = [
     {
-      imageSrc: JalJeera,
+      imageSrc: QuinoaBowl,
       profileImageSrc: BananaBread,
       quote:
-        "Sinor Duis aute irure dolor in Text about JalJeera velit esse. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
+        "Embracing the art of cooking is not just about feeding oneself; it's a fundamental skill for survival and independence.",
       customerName: "Adam Cuppy",
       customerTitle: "Founder, EventsNYC",
+    },
+    {
+      imageSrc: JalJeera,
+      profileImageSrc: Pizza,
+      quote:
+        "Recipes are invitations to explore, experiment, and enjoy the process of creating something beautiful and delicious.",
     },
     {
       imageSrc: Pizza,
-      profileImageSrc: Pizza,
-      quote:
-        "Duis aute irure dolor SOME TEXT ABOUT PIZZA eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-    },
-    {
-      imageSrc: BananaBread,
       profileImageSrc: BananaBread,
       quote:
-        "Sinor Duis aute irure dolor in Text about Banana Bread velit esse. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
+        "Each recipe has been tried and tested in my own kitchen, ensuring that you're guided by hands that have learned through trial and success.",
       customerName: "Adam Cuppy",
       customerTitle: "Founder, EventsNYC",
+    },
+    {
+      imageSrc: CremeBrulee,
+      profileImageSrc: BananaBread,
+      quote:
+        "You'll learn different techniques that not only aim to perfect dishes but also teach the science behind what makes them work.",
+      customerName: "Adam Cuppy",
     },
   ];
 

@@ -29,13 +29,17 @@ export default () => {
         }
         description={
           <Description>
-            Savour the spice of life at and embark on a culinary journey with
-            us, where traditional Indian cooking meets the world’s flavors.
+            Welcome to my culinary world, where every dish tells a story, and
+            every flavour carries a legacy.
             <br />
             <br />
-            From the bustling streets of Tripura to the heart of Paris, our
-            recipes, cooking techniques, and equipment guides are your passport
-            to global cuisine right from your kitchen
+            Embracing the art of cooking is not just about feeding oneself; it's
+            a fundamental skill for survival and independence.
+            <br />
+            <br />
+            Recognizing this, I've dedicated myself to demystifying the kitchen,
+            proving that culinary excellence isn't reserved for the chefs in
+            high-end restaurants.
           </Description>
         }
         imageSrc={HeroImageSrc}
