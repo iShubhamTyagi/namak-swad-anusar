@@ -29,9 +29,8 @@ export default () => {
             every flavour carries a legacy!
             <br />
             <br />
-            Embracing the art of cooking is not just about feeding oneself;
-            <br />
-            it's a fundamental skill for survival and independence.
+            Embracing the art of cooking is not just about feeding oneself; it's
+            a fundamental skill for survival and independence.
             <br />
             <br />
             Recognizing this, I've dedicated myself to demystifying the kitchen,

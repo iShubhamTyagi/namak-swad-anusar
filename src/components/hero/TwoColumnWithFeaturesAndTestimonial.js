@@ -24,8 +24,8 @@ const Column = tw.div``;
 const TextColumn = tw(Column)`lg:w-2/3`;
 const Heading = tw(
   SectionHeading
-)`text-right text-primary-900 leading-snug xl:text-7xl pb-0 mb-4`;
-const Byline = tw.p`text-right text-base xl:text-4xl`;
+)`text-left text-primary-900 leading-snug xl:text-7xl pb-0 mb-4`;
+const Byline = tw.p`text-left text-base xl:text-4xl`;
 const Description = tw(
   SectionDescription
 )`lg:max-w-none text-gray-700 text-xl text-left mr-0`;

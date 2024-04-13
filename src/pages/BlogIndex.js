@@ -70,7 +70,7 @@ export default ({}) => {
 
   useEffect(() => {
     fetch(
-      "https://public-api.wordpress.com/rest/v1.1/sites/myshelter00.wordpress.com/posts"
+      "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts"
     )
       .then((response) => response.json())
       .then((data) => {

@@ -89,7 +89,7 @@ export default ({
     <Container>
       <Content>
         <HeadingInfoContainer>
-          {subheading && <Subheading>{subheading}</Subheading>}
+          {/* {subheading && <Subheading>{subheading}</Subheading>} */}
           <HeadingTitle>{heading}</HeadingTitle>
           <HeadingDescription>{description}</HeadingDescription>
         </HeadingInfoContainer>

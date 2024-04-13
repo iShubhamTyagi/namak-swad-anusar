@@ -76,7 +76,7 @@ export default ({
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">Home</NavLink>
+      <NavLink href="/#">About</NavLink>
       <NavLink href="/blogs">Blogs</NavLink>
       <NavLink href="/#">Contact</NavLink>
       {/* <NavLink href="/#" tw="lg:ml-12!">
