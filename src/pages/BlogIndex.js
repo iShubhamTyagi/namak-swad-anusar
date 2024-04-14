@@ -78,11 +78,11 @@ export default ({}) => {
         const fetchedPosts = data.posts.map((post) => {
           let thumbnailUrl = "";
           if (post.attachments) {
-            const firstAttachmentId = Object.keys(post.attachments)[0];
-            const firstAttachment = post.attachments[firstAttachmentId];
-            thumbnailUrl = firstAttachment.URL;
+            const firstAttachment = Object.values(post.attachments)[0];
+            if (firstAttachment && firstAttachment.URL) {
+              thumbnailUrl = firstAttachment.URL;
+            }
           }
-
           return {
             id: post.ID,
             title: post.title,
@@ -112,11 +112,11 @@ export default ({}) => {
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
-  // useEffect(() => {
-  //   if (blogPosts[0] && blogPosts[0].tags) {
-  //     console.log("Blog Posts --> " + blogPosts);
-  //   }
-  // }, [blogPosts && blogPosts.length > 0]);
+  useEffect(() => {
+    if (blogPosts[0] && blogPosts[0].tags) {
+      console.log("Blog Posts --> " + blogPosts);
+    }
+  }, [blogPosts && blogPosts.length > 0]);
 
   return (
     <AnimationRevealPage disabled>
