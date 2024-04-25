@@ -2,17 +2,11 @@ import React from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import Hero from "components/hero/TwoColumnWithVideo.js";
-import Features from "components/features/ThreeColSimple.js";
-import MainFeature from "components/features/TwoColWithButton.js";
-import MainFeature2 from "components/features/TwoColSingleFeatureWithStats2.js";
-import TabGrid from "components/cards/TabCardGrid.js";
-import Footer from "components/footers/MiniCenteredFooter.js";
-import HeroImageSrc from "../assets/images/BreadAndHummus.jpg";
-
-import chefIconImageSrc from "images/chef-icon.svg";
-import celebrationIconImageSrc from "images/celebration-icon.svg";
-import shopIconImageSrc from "images/shop-icon.svg";
+import Hero from "components/hero/TwoColumnWithFeaturesAndTestimonial";
+import Panel from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
+import HeroImageSrc from "../assets/images/Sourajit.svg";
+import ContactUsForm from "components/forms/SimpleContactUs.js";
+import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
 
 export default () => {
   const Subheading = tw.span`tracking-wider text-sm font-medium`;
@@ -25,19 +19,23 @@ export default () => {
       <Hero
         heading={
           <>
-            Savour the spice of life at{" "}
-            <HighlightedText>Namak Swadanusar</HighlightedText>
+            Namak Swadanusar
+            {/* <HighlightedText>Namak Swadanusar</HighlightedText> */}
           </>
         }
         description={
           <Description>
-            Embark on a culinary journey with us, where traditional Indian
-            cooking meets the world’s flavors.
+            Welcome to my culinary world, where every dish tells a story, and
+            every flavour carries a legacy!
             <br />
             <br />
-            From the bustling streets of Tripura to the heart of Paris, our
-            recipes, cooking techniques, and equipment guides are your passport
-            to global cuisine right from your kitchen
+            Embracing the art of cooking is not just about feeding oneself; it's
+            a fundamental skill for survival and independence.
+            <br />
+            <br />
+            Recognizing this, I've dedicated myself to demystifying the kitchen,
+            proving that culinary excellence isn't reserved for the chefs in
+            high-end restaurants.
           </Description>
         }
         imageSrc={HeroImageSrc}
@@ -46,7 +44,8 @@ export default () => {
         primaryButtonText="Order Now"
         watchVideoButtonText="Channel Trailer"
       />
-      <MainFeature
+      <Panel />
+      {/* <MainFeature
         subheading={<Subheading>Established Since 2014</Subheading>}
         heading={
           <>
@@ -73,45 +72,11 @@ export default () => {
         imageCss={imageCss}
         imageDecoratorBlob={true}
         imageDecoratorBlobCss={tw`left-1/2 -translate-x-1/2 md:w-32 md:h-32 opacity-25`}
-      />
-      {/* TabGrid Component also accepts a tabs prop to customize the tabs and its content directly. Please open the TabGrid component file to see the structure of the tabs props.*/}
-      <TabGrid
-        heading={
-          <>
-            Checkout our <HighlightedText>menu.</HighlightedText>
-          </>
-        }
-      />
-      <Features
-        heading={
-          <>
-            Amazing <HighlightedText>Services.</HighlightedText>
-          </>
-        }
-        cards={[
-          {
-            imageSrc: shopIconImageSrc,
-            title: "230+ Locations",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
-            url: "https://google.com",
-          },
-          {
-            imageSrc: chefIconImageSrc,
-            title: "Professional Chefs",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
-            url: "https://timerse.com",
-          },
-          {
-            imageSrc: celebrationIconImageSrc,
-            title: "Birthday Catering",
-            description: "Lorem ipsum donor amet siti ceali placeholder text",
-            url: "https://reddit.com",
-          },
-        ]}
-        imageContainerCss={tw`p-2!`}
-        imageCss={tw`w-20! h-20!`}
-      />
-      <MainFeature2
+      /> */}
+
+      {<BlogPreview />}
+      {<ContactUsForm />}
+      {/* <MainFeature2
         subheading={<Subheading>A Reputed Brand</Subheading>}
         heading={
           <>
@@ -141,8 +106,7 @@ export default () => {
         imageDecoratorBlob={true}
         imageDecoratorBlobCss={tw`left-1/2 md:w-32 md:h-32 -translate-x-1/2 opacity-25`}
         textOnLeft={true}
-      />
-      <Footer />
+      /> */}
     </AnimationRevealPage>
   );
 };

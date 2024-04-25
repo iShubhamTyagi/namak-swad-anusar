@@ -17,15 +17,15 @@ module.exports = {
       white: "#fff",
 
       primary: {
-        100: "#FFFDE3",
-        200: "#CFE8A9",
-        300: "#E64848",
-        400: "#C21010",
-        500: "#C21010",
-        600: "#C21010",
-        700: "#C21010",
-        800: "#C21010",
-        900: "#C21010",
+        100: "#333652",
+        200: "#90ADC6",
+        300: "#FAD02C",
+        400: "#E9EAEC",
+        500: "#333652",
+        600: "#333652",
+        700: "#333652",
+        800: "#333652",
+        900: "#333652",
       },
 
       secondary: {
@@ -75,7 +75,7 @@ module.exports = {
         900: "#7b341e",
       },
       yellow: {
-        100: "#fffff0",
+        100: "#FAD02C",
         200: "#fefcbf",
         300: "#faf089",
         400: "#f6e05e",
@@ -108,7 +108,7 @@ module.exports = {
         900: "#234e52",
       },
       blue: {
-        100: "#ebf8ff",
+        100: "#333652",
         200: "#bee3f8",
         300: "#90cdf4",
         400: "#63b3ed",
@@ -308,6 +308,7 @@ module.exports = {
       "4xl": "2.25rem",
       "5xl": "3rem",
       "6xl": "4rem",
+      "7xl": "6rem",
     },
     fontWeight: {
       hairline: "100",
@@ -784,5 +785,5 @@ module.exports = {
     transitionDuration: ["responsive"],
   },
   corePlugins: {},
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

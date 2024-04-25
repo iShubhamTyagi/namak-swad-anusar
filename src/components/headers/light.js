@@ -6,7 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 
-import logo from "../../images/logo.svg";
+import logo from "../../assets/images/Logo.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 
@@ -21,9 +21,7 @@ export const NavLinks = tw.div`inline-block`;
  * hocus:bg-primary-700 will apply the bg-primary-700 class on hover or focus
  */
 export const NavLink = tw.a`
-  text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
-  font-sans font-semibold tracking-wide transition duration-300
-  pb-1 border-b-2 border-transparent hover:border-primary-500 hocus:text-primary-500
+text-xl my-2 font-sans lg:text-base lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 hocus:border-primary-300 hocus:text-primary-500 border-b-2 border-transparent
 `;
 
 export const PrimaryLink = tw(NavLink)`
@@ -79,8 +77,8 @@ export default ({
   const defaultLinks = [
     <NavLinks key={1}>
       <NavLink href="/#">About</NavLink>
-      <NavLink href="/#">Blog</NavLink>
-      <NavLink href="/#">Contact Us</NavLink>
+      <NavLink href="/blogs">Blogs</NavLink>
+      <NavLink href="/#">Contact</NavLink>
       {/* <NavLink href="/#" tw="lg:ml-12!">
         Login
       </NavLink>
@@ -97,7 +95,6 @@ export default ({
   const defaultLogoLink = (
     <LogoLink href="/">
       <img src={logo} alt="logo" />
-      Namak Swadanusar by Sourajit Das
     </LogoLink>
   );
 
