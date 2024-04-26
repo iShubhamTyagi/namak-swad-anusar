@@ -9,9 +9,9 @@ import ContactUsForm from "components/forms/SimpleContactUs.js";
 import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
 
 export default () => {
-  const Subheading = tw.span`tracking-wider text-sm font-medium`;
-  const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block font-display font-light`;
-  const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
+  // const Subheading = tw.span`tracking-wider text-sm font-medium`;
+  // const HighlightedText = tw.span`bg-primary-500 text-gray-100 px-4 transform -skew-x-12 inline-block font-display font-light`;
+  // const HighlightedTextInverse = tw.span`bg-gray-100 text-primary-500 px-4 transform -skew-x-12 inline-block`;
   const Description = tw.span`inline-block mt-8 font-sans`;
   const imageCss = tw`rounded-4xl`;
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -53,16 +53,14 @@ const Description = tw.div``;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
-export default ({}) => {
+export default () => {
   const [visible, setVisible] = useState(7);
-
   const { setBlogPosts, setCurrentPost } = useBlogUpdate();
   const { blogPosts } = useBlog();
 
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
-
   const handlePostClick = (postId) => {
     setCurrentPost(postId);
     // navigate to the BlogPage
@@ -110,13 +108,15 @@ export default ({}) => {
         setBlogPosts(fetchedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
-  }, []);
+  });
+
+  const blogPostsExist = blogPosts && blogPosts.length > 0;
 
   useEffect(() => {
-    if (blogPosts[0] && blogPosts[0].tags) {
+    if (blogPostsExist && blogPosts[0].tags) {
       console.log("Blog Posts --> " + blogPosts);
     }
-  }, [blogPosts && blogPosts.length > 0]);
+  }, [blogPosts, blogPostsExist]);
 
   return (
     <AnimationRevealPage disabled>
