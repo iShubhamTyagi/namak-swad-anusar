@@ -7,8 +7,10 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as TagIcon } from "feather-icons/dist/icons/tag.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-3.svg";
-import { useBlog } from "../context/BlogContext.js";
+import { useBlog, useBlogUpdate } from "../context/BlogContext.js";
 import useFetchBlogs from "pages/FetchBlogs";
+import { useNavigate } from "react-router-dom";
+
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 const ThreeColumn = tw.div`flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap`;
@@ -53,6 +55,8 @@ export default ({
   useFetchBlogs();
   const { blogPosts } = useBlog();
   const [previewBlogs, setPreviewBlogs] = useState([]);
+  const { setCurrentPost } = useBlogUpdate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (blogPosts && blogPosts.length > 0) {
@@ -62,6 +66,16 @@ export default ({
       setPreviewBlogs(sortedPosts.slice(0, 3));
     }
   }, [blogPosts]);
+
+  useEffect(() => {
+    console.log("previewBlogs --> ", previewBlogs);
+  }, [previewBlogs]);
+
+  const handlePostClick = (postId) => {
+    console.log("Post clicked --> ", postId);
+    setCurrentPost(postId);
+    navigate(`/blog/${postId}`);
+  };
 
   useEffect(() => {
     console.log("previewBlogs --> ", previewBlogs);
@@ -77,7 +91,7 @@ export default ({
         </HeadingInfoContainer>
         <ThreeColumn>
           {previewBlogs.map((post, index) => (
-            <Column key={index}>
+            <Column key={index} onClick={() => handlePostClick(post.id)}>
               <Card>
                 <Image imageSrc={post.thumbnailUrl} />
                 <Details>
@@ -93,7 +107,17 @@ export default ({
                   </MetaContainer>
                   <Title>{post.title}</Title>
                   <Description>{post.excerpt}</Description>
-                  <Link href={post.url}>Read Post</Link>
+                  <Link
+                    as={Link}
+                    to={`/blog/${post.id}`}
+                    onClick={() => handlePostClick(post.id)}
+                    style={{
+                      textDecoration: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Read Post
+                  </Link>
                 </Details>
               </Card>
             </Column>
