@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -7,10 +7,8 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as TagIcon } from "feather-icons/dist/icons/tag.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-3.svg";
-import CremeBrulee from "../../assets/images/CremeBrulee.jpg";
-import Kalakand from "../../assets/images/Kalakand.jpg";
-import Jaljeera from "../../assets/images/Jaljeera.jpg";
-
+import { useBlog } from "../context/BlogContext.js";
+import useFetchBlogs from "pages/FetchBlogs";
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`;
 const ThreeColumn = tw.div`flex flex-col items-center lg:items-stretch lg:flex-row flex-wrap`;
@@ -34,7 +32,7 @@ const Meta = styled.div`
   }
 `;
 
-const Title = tw.h5`mt-4 leading-snug font-bold text-lg`;
+const Title = tw.h5`mt-4 leading-snug text-lg`;
 const Description = tw.p`font-sans mt-2 text-sm text-secondary-100`;
 const Link = styled(PrimaryButtonBase).attrs({ as: "a" })`
   ${tw`font-sans inline-block mt-4 text-sm font-semibold`}
@@ -52,35 +50,23 @@ export default ({
   heading = <>Learn With Me</>,
   description = "Explore the Essence of Cooking: Dive into Recipes, Master Techniques, and Discover Essential Equipment",
 }) => {
-  const blogPosts = [
-    {
-      imageSrc: Jaljeera,
-      author: "Adam Wathan",
-      category: "Recipes",
-      title: "Recipe of Jaljeera",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      url: "https://reddit.com",
-    },
-    {
-      imageSrc: CremeBrulee,
-      author: "Owais Khan",
-      category: "Techniques",
-      title: "Techniques of Creme Brulee",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      url: "https://timerse.com",
-    },
-    {
-      imageSrc: Kalakand,
-      author: "Steve Schoger",
-      category: "Equipments",
-      title: "Equipments for Kalakand",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      url: "https://timerse.com",
-    },
-  ];
+  useFetchBlogs();
+  const { blogPosts } = useBlog();
+  const [previewBlogs, setPreviewBlogs] = useState([]);
+
+  useEffect(() => {
+    if (blogPosts && blogPosts.length > 0) {
+      const sortedPosts = [...blogPosts].sort(
+        (a, b) => new Date(b.datetime) - new Date(a.datetime)
+      );
+      setPreviewBlogs(sortedPosts.slice(0, 3));
+    }
+  }, [blogPosts]);
+
+  useEffect(() => {
+    console.log("previewBlogs --> ", previewBlogs);
+  }, [previewBlogs]);
+
   return (
     <Container>
       <Content>
@@ -90,10 +76,10 @@ export default ({
           <HeadingDescription>{description}</HeadingDescription>
         </HeadingInfoContainer>
         <ThreeColumn>
-          {blogPosts.map((post, index) => (
+          {previewBlogs.map((post, index) => (
             <Column key={index}>
               <Card>
-                <Image imageSrc={post.imageSrc} />
+                <Image imageSrc={post.thumbnailUrl} />
                 <Details>
                   <MetaContainer>
                     {/* <Meta>
@@ -106,7 +92,7 @@ export default ({
                     </Meta>
                   </MetaContainer>
                   <Title>{post.title}</Title>
-                  <Description>{post.description}</Description>
+                  <Description>{post.excerpt}</Description>
                   <Link href={post.url}>Read Post</Link>
                 </Details>
               </Card>

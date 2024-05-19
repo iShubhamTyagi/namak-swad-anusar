@@ -71,7 +71,6 @@ export default ({
     <NavLinks key={1}>
       <NavLink href="/#">About</NavLink>
       <NavLink href="/blogs">Blog</NavLink>
-      <NavLink href="/#">Contact</NavLink>
     </NavLinks>,
     <NavLinks key={2}>
       {/* <NavLink href="/#" tw="lg:ml-12!">

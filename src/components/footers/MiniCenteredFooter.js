@@ -40,7 +40,6 @@ export default () => {
           <LinksContainer>
             <Link href="">About</Link>
             <Link href="blogs">Blogs</Link>
-            <Link href="#">Contact</Link>
           </LinksContainer>
           <SocialLinksContainer>
             <SocialLink href="https://facebook.com">
