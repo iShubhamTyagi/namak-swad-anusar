@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useBlogUpdate } from "../components/context/BlogContext";
+import { useBlog } from "../components/context/BlogContext";
 
 const useFetchBlogs = () => {
-  const { setBlogPosts } = useBlogUpdate();
+  const { blogState, setBlogPosts, setCurrentPost } = useBlog();
   let fetchedPosts = null;
   useEffect(() => {
     fetch(

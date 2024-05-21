@@ -8,10 +8,7 @@ import Header from "components/headers/light.js";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton } from "components/misc/Buttons";
 import { Link } from "react-router-dom";
-import {
-  useBlog,
-  useBlogUpdate,
-} from "../../src/components/context/BlogContext";
+import { useBlog } from "../../src/components/context/BlogContext";
 import useFetchBlogs from "./FetchBlogs";
 
 const HeadingRow = tw.div`flex`;
@@ -56,8 +53,7 @@ const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
 export default () => {
   const [visible, setVisible] = useState(7);
-  const { setCurrentPost } = useBlogUpdate();
-  const { blogPosts } = useBlog();
+  const { blogState, setBlogPosts, setCurrentPost } = useBlog();
   useFetchBlogs();
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
@@ -66,13 +62,13 @@ export default () => {
     setCurrentPost(postId);
   };
 
-  const blogPostsExist = blogPosts && blogPosts.length > 0;
+  const blogPostsExist = blogState.blogPosts && blogState.blogPosts.length > 0;
 
   useEffect(() => {
-    if (blogPostsExist && blogPosts[0].tags) {
-      console.log("Blog Posts --> " + blogPosts);
+    if (blogPostsExist && blogState.blogPosts[0].tags) {
+      console.log("Blog Posts --> " + blogState.blogPosts);
     }
-  }, [blogPosts, blogPostsExist]);
+  }, [blogState.blogPosts, blogPostsExist]);
 
   return (
     <AnimationRevealPage disabled>
@@ -83,9 +79,9 @@ export default () => {
             <Heading>Blog Posts</Heading>
           </HeadingRow>
           <Posts>
-            {blogPosts &&
-              blogPosts?.length > 0 &&
-              blogPosts.slice(0, visible).map((post, index) => (
+            {blogState.blogPosts &&
+              blogState.blogPosts?.length > 0 &&
+              blogState.blogPosts.slice(0, visible).map((post, index) => (
                 <PostContainer key={index} featured={post.featured}>
                   <Post
                     className="group"
@@ -107,7 +103,7 @@ export default () => {
                 </PostContainer>
               ))}
           </Posts>
-          {visible < blogPosts?.length && (
+          {visible < blogState.blogPosts?.length && (
             <ButtonContainer>
               <LoadMoreButton onClick={onLoadMoreClick}>
                 Load More
