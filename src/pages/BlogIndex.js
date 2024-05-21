@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -51,9 +51,9 @@ const Description = tw.div``;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
-export default () => {
+export default (props) => {
   const [visible, setVisible] = useState(7);
-  const { blogState, setBlogPosts, setCurrentPost } = useBlog();
+  const { blogState, setCurrentPost } = useBlog();
   useFetchBlogs();
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
@@ -62,13 +62,13 @@ export default () => {
     setCurrentPost(postId);
   };
 
-  const blogPostsExist = blogState.blogPosts && blogState.blogPosts.length > 0;
+  // const blogPostsExist = blogState.blogPosts && blogState.blogPosts.length > 0;
 
-  useEffect(() => {
-    if (blogPostsExist && blogState.blogPosts[0].tags) {
-      console.log("Blog Posts --> " + blogState.blogPosts);
-    }
-  }, [blogState.blogPosts, blogPostsExist]);
+  // useEffect(() => {
+  //   if (blogPostsExist && blogState.blogPosts[0].tags) {
+  //     console.log("Blog Posts --> " + blogState.blogPosts);
+  //   }
+  // }, [blogState.blogPosts, blogPostsExist]);
 
   return (
     <AnimationRevealPage disabled>
@@ -76,7 +76,7 @@ export default () => {
       <Container>
         <ContentWithPaddingXl>
           <HeadingRow>
-            <Heading>Blog Posts</Heading>
+            <Heading>{props.text}</Heading>
           </HeadingRow>
           <Posts>
             {blogState.blogPosts &&

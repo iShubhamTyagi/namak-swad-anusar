@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
+import isEqual from "lodash/isEqual";
 
 export const BlogContext = createContext();
 
@@ -6,19 +13,36 @@ export const BlogProvider = ({ children }) => {
   const [blogState, setBlogState] = useState({
     blogPosts: [],
     currentPost: null,
+    recipeBlogs: [],
+    techniqueBlogs: [],
   });
-
+  const prevBlogPostsRef = useRef();
   useEffect(() => {
-    console.log("Blog state updated", blogState);
-  }, [blogState]);
+    if (!isEqual(prevBlogPostsRef.current, blogState.blogPosts)) {
+      console.log("Blog state updated", blogState);
+    }
+    prevBlogPostsRef.current = blogState.blogPosts;
+  }, [blogState, blogState.blogPosts]);
 
   const setBlogPosts = (posts) =>
     setBlogState((prevState) => ({ ...prevState, blogPosts: posts }));
   const setCurrentPost = (post) =>
     setBlogState((prevState) => ({ ...prevState, currentPost: post }));
+  const setRecipeBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, recipeBlogs: post }));
+  const setTechniqueBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, techniqueBlogs: post }));
 
   return (
-    <BlogContext.Provider value={{ blogState, setBlogPosts, setCurrentPost }}>
+    <BlogContext.Provider
+      value={{
+        blogState,
+        setBlogPosts,
+        setCurrentPost,
+        setRecipeBlogs,
+        setTechniqueBlogs,
+      }}
+    >
       {children}
     </BlogContext.Provider>
   );

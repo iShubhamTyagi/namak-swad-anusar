@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useBlog } from "../components/context/BlogContext";
 
 const useFetchBlogs = () => {
-  const { blogState, setBlogPosts, setCurrentPost } = useBlog();
+  const { blogState, setBlogPosts } = useBlog();
   let fetchedPosts = null;
+
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts"
@@ -46,8 +47,9 @@ const useFetchBlogs = () => {
         setBlogPosts(fetchedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
-  }, [setBlogPosts]);
+  }, []);
 
+  // eslint-disable-next-line
   useEffect(() => {
     console.log("Fetched -->" + fetchedPosts);
   }, [fetchedPosts]);

@@ -53,7 +53,7 @@ export default ({
   description = "Explore the Essence of Cooking: Dive into Recipes, Master Techniques, and Discover Essential Equipment",
 }) => {
   useFetchBlogs();
-  const { blogState, setBlogPosts, setCurrentPost } = useBlog();
+  const { blogState, setCurrentPost } = useBlog();
   const [previewBlogs, setPreviewBlogs] = useState([]);
   const navigate = useNavigate();
 
@@ -66,19 +66,11 @@ export default ({
     }
   }, [blogState.blogPosts]);
 
-  useEffect(() => {
-    console.log("previewBlogs --> ", previewBlogs);
-  }, [previewBlogs]);
-
   const handlePostClick = (postId) => {
     console.log("Post clicked --> ", postId);
     setCurrentPost(postId);
     navigate(`/blog/${postId}`);
   };
-
-  useEffect(() => {
-    console.log("previewBlogs --> ", previewBlogs);
-  }, [previewBlogs]);
 
   return (
     <Container>
