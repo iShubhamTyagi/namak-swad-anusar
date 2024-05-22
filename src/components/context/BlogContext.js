@@ -1,27 +1,55 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
+import isEqual from "lodash/isEqual";
 
-// Creating separate contexts for reading and updating state
 export const BlogContext = createContext();
-export const BlogUpdateContext = createContext();
 
 export const BlogProvider = ({ children }) => {
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(null);
-
+  const [blogState, setBlogState] = useState({
+    blogPosts: [],
+    currentPost: null,
+    recipeBlogs: [],
+    techniqueBlogs: [],
+    displayBlogs: [],
+  });
+  const prevBlogPostsRef = useRef();
   useEffect(() => {
-    console.log("Blog posts updated", blogPosts);
-    console.log("Current post updated", currentPost);
-  }, [blogPosts, currentPost]);
+    if (!isEqual(prevBlogPostsRef.current, blogState.blogPosts)) {
+      console.log("Blog state updated", blogState);
+    }
+    prevBlogPostsRef.current = blogState.blogPosts;
+  }, [blogState, blogState.blogPosts]);
+
+  const setBlogPosts = (posts) =>
+    setBlogState((prevState) => ({ ...prevState, blogPosts: posts }));
+  const setCurrentPost = (post) =>
+    setBlogState((prevState) => ({ ...prevState, currentPost: post }));
+  const setRecipeBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, recipeBlogs: post }));
+  const setTechniqueBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, techniqueBlogs: post }));
+  const setDisplayBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, displayBlogs: post }));
 
   return (
-    <BlogContext.Provider value={{ blogPosts, currentPost }}>
-      <BlogUpdateContext.Provider value={{ setBlogPosts, setCurrentPost }}>
-        {children}
-      </BlogUpdateContext.Provider>
+    <BlogContext.Provider
+      value={{
+        blogState,
+        setBlogPosts,
+        setCurrentPost,
+        setRecipeBlogs,
+        setTechniqueBlogs,
+        setDisplayBlogs,
+      }}
+    >
+      {children}
     </BlogContext.Provider>
   );
 };
 
 export const useBlog = () => useContext(BlogContext);
-
-export const useBlogUpdate = () => useContext(BlogUpdateContext);

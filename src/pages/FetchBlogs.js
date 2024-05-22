@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { useBlogUpdate } from "../components/context/BlogContext";
+import { useBlog } from "../components/context/BlogContext";
 
 const useFetchBlogs = () => {
-  const { setBlogPosts } = useBlogUpdate();
-  let fetchedPosts = null;
+  const { setBlogPosts } = useBlog();
+
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts"
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Fetch trigerred", data);
         const fetchedPosts = data.posts.map((post) => {
           let thumbnailUrl = "";
           if (post.attachments) {
@@ -46,11 +46,8 @@ const useFetchBlogs = () => {
         setBlogPosts(fetchedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
-  }, [setBlogPosts]);
-
-  useEffect(() => {
-    console.log("Fetched -->" + fetchedPosts);
-  }, [fetchedPosts]);
+    // eslint-disable-next-line
+  }, []);
 };
 
 export default useFetchBlogs;

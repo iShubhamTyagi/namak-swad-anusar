@@ -127,7 +127,11 @@ export default function App() {
               element={<ComponentRenderer />}
             />
             <Route path="/thank-you" element={<ThankYouPage />} />
-            <Route path="/blogs" element={<BlogIndexPage />} />
+            <Route path="/recipes" element={<BlogIndexPage text="Recipes" />} />
+            <Route
+              path="/techniques"
+              element={<BlogIndexPage text="Techniques" />}
+            />
             <Route path="/blog/:id" element={<BlogPage />} />
             <Route path="/" element={<RestaurantLandingPage />} />
           </Routes>

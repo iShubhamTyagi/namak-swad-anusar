@@ -8,9 +8,6 @@ import {
   Container,
   ContentWithVerticalPadding,
 } from "components/misc/Layouts.js";
-// import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-// import { ReactComponent as QuotesLeftIconBase } from "images/quotes-l.svg";
-// import { ReactComponent as SvgDecoratorBlob1 } from "images/dot-pattern.svg";
 
 const Header = tw(HeaderBase)`max-w-none`;
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
@@ -70,7 +67,8 @@ export default ({
   const navLinks = [
     <NavLinks key={1}>
       <NavLink href="/#">About</NavLink>
-      <NavLink href="/blogs">Blog</NavLink>
+      <NavLink href="/recipes">Recipes</NavLink>
+      <NavLink href="/techniques">Techniques</NavLink>
     </NavLinks>,
     <NavLinks key={2}>
       {/* <NavLink href="/#" tw="lg:ml-12!">

@@ -7,7 +7,7 @@ import { PrimaryButton as PrimaryButtonBase } from "components/misc/Buttons.js";
 import { ReactComponent as TagIcon } from "feather-icons/dist/icons/tag.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-3.svg";
-import { useBlog, useBlogUpdate } from "../context/BlogContext.js";
+import { useBlog } from "../context/BlogContext.js";
 import useFetchBlogs from "pages/FetchBlogs";
 import { useNavigate } from "react-router-dom";
 
@@ -53,33 +53,24 @@ export default ({
   description = "Explore the Essence of Cooking: Dive into Recipes, Master Techniques, and Discover Essential Equipment",
 }) => {
   useFetchBlogs();
-  const { blogPosts } = useBlog();
+  const { blogState, setCurrentPost } = useBlog();
   const [previewBlogs, setPreviewBlogs] = useState([]);
-  const { setCurrentPost } = useBlogUpdate();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (blogPosts && blogPosts.length > 0) {
-      const sortedPosts = [...blogPosts].sort(
+    if (blogState.blogPosts && blogState.blogPosts.length > 0) {
+      const sortedPosts = [...blogState.blogPosts].sort(
         (a, b) => new Date(b.datetime) - new Date(a.datetime)
       );
       setPreviewBlogs(sortedPosts.slice(0, 3));
     }
-  }, [blogPosts]);
-
-  useEffect(() => {
-    console.log("previewBlogs --> ", previewBlogs);
-  }, [previewBlogs]);
+  }, [blogState.blogPosts]);
 
   const handlePostClick = (postId) => {
     console.log("Post clicked --> ", postId);
     setCurrentPost(postId);
     navigate(`/blog/${postId}`);
   };
-
-  useEffect(() => {
-    console.log("previewBlogs --> ", previewBlogs);
-  }, [previewBlogs]);
 
   return (
     <Container>

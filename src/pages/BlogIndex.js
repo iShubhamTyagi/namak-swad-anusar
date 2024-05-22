@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -8,10 +8,7 @@ import Header from "components/headers/light.js";
 import { SectionHeading } from "components/misc/Headings";
 import { PrimaryButton } from "components/misc/Buttons";
 import { Link } from "react-router-dom";
-import {
-  useBlog,
-  useBlogUpdate,
-} from "../../src/components/context/BlogContext";
+import { useBlog } from "../../src/components/context/BlogContext";
 import useFetchBlogs from "./FetchBlogs";
 
 const HeadingRow = tw.div`flex`;
@@ -54,25 +51,35 @@ const Description = tw.div``;
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
-export default () => {
-  const [visible, setVisible] = useState(7);
-  const { setCurrentPost } = useBlogUpdate();
-  const { blogPosts } = useBlog();
+export default (props) => {
+  const [visible, setVisible] = useState(6);
+  const { blogState, setCurrentPost, setDisplayBlogs } = useBlog();
+
   useFetchBlogs();
+
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
   const handlePostClick = (postId) => {
     setCurrentPost(postId);
   };
-
-  const blogPostsExist = blogPosts && blogPosts.length > 0;
-
+  // eslint-disable-next-line
   useEffect(() => {
-    if (blogPostsExist && blogPosts[0].tags) {
-      console.log("Blog Posts --> " + blogPosts);
+    if (blogState.blogPosts && blogState.blogPosts.length > 0) {
+      if (props.text === "Recipes") {
+        setDisplayBlogs(
+          blogState.blogPosts.filter((post) => post.tags && post.tags.recipes)
+        );
+      } else if (props.text === "Techniques") {
+        setDisplayBlogs(
+          blogState.blogPosts.filter(
+            (post) => post.tags && post.tags.Techniques
+          )
+        );
+      }
     }
-  }, [blogPosts, blogPostsExist]);
+    // eslint-disable-next-line
+  }, [props.text, blogState.blogPosts]);
 
   return (
     <AnimationRevealPage disabled>
@@ -80,12 +87,12 @@ export default () => {
       <Container>
         <ContentWithPaddingXl>
           <HeadingRow>
-            <Heading>Blog Posts</Heading>
+            <Heading>{props.text}</Heading>
           </HeadingRow>
           <Posts>
-            {blogPosts &&
-              blogPosts?.length > 0 &&
-              blogPosts.slice(0, visible).map((post, index) => (
+            {blogState.displayBlogs &&
+              blogState.displayBlogs?.length > 0 &&
+              blogState.displayBlogs.slice(0, visible).map((post, index) => (
                 <PostContainer key={index} featured={post.featured}>
                   <Post
                     className="group"
@@ -107,7 +114,7 @@ export default () => {
                 </PostContainer>
               ))}
           </Posts>
-          {visible < blogPosts?.length && (
+          {visible < blogState.displayBlogs?.length && (
             <ButtonContainer>
               <LoadMoreButton onClick={onLoadMoreClick}>
                 Load More
