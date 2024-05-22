@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import tw from "twin.macro";
@@ -52,23 +52,34 @@ const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
 
 export default (props) => {
-  const [visible, setVisible] = useState(7);
-  const { blogState, setCurrentPost } = useBlog();
+  const [visible, setVisible] = useState(6);
+  const { blogState, setCurrentPost, setDisplayBlogs } = useBlog();
+
   useFetchBlogs();
+
   const onLoadMoreClick = () => {
     setVisible((v) => v + 6);
   };
   const handlePostClick = (postId) => {
     setCurrentPost(postId);
   };
-
-  // const blogPostsExist = blogState.blogPosts && blogState.blogPosts.length > 0;
-
-  // useEffect(() => {
-  //   if (blogPostsExist && blogState.blogPosts[0].tags) {
-  //     console.log("Blog Posts --> " + blogState.blogPosts);
-  //   }
-  // }, [blogState.blogPosts, blogPostsExist]);
+  // eslint-disable-next-line
+  useEffect(() => {
+    if (blogState.blogPosts && blogState.blogPosts.length > 0) {
+      if (props.text === "Recipes") {
+        setDisplayBlogs(
+          blogState.blogPosts.filter((post) => post.tags && post.tags.recipes)
+        );
+      } else if (props.text === "Techniques") {
+        setDisplayBlogs(
+          blogState.blogPosts.filter(
+            (post) => post.tags && post.tags.Techniques
+          )
+        );
+      }
+    }
+    // eslint-disable-next-line
+  }, [props.text, blogState.blogPosts]);
 
   return (
     <AnimationRevealPage disabled>
@@ -79,9 +90,9 @@ export default (props) => {
             <Heading>{props.text}</Heading>
           </HeadingRow>
           <Posts>
-            {blogState.blogPosts &&
-              blogState.blogPosts?.length > 0 &&
-              blogState.blogPosts.slice(0, visible).map((post, index) => (
+            {blogState.displayBlogs &&
+              blogState.displayBlogs?.length > 0 &&
+              blogState.displayBlogs.slice(0, visible).map((post, index) => (
                 <PostContainer key={index} featured={post.featured}>
                   <Post
                     className="group"
@@ -103,7 +114,7 @@ export default (props) => {
                 </PostContainer>
               ))}
           </Posts>
-          {visible < blogState.blogPosts?.length && (
+          {visible < blogState.displayBlogs?.length && (
             <ButtonContainer>
               <LoadMoreButton onClick={onLoadMoreClick}>
                 Load More

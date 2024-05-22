@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useBlog } from "../components/context/BlogContext";
 
 const useFetchBlogs = () => {
-  const { blogState, setBlogPosts } = useBlog();
-  let fetchedPosts = null;
+  const { setBlogPosts } = useBlog();
 
   useEffect(() => {
     fetch(
@@ -11,7 +10,7 @@ const useFetchBlogs = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("Fetch trigerred", data);
         const fetchedPosts = data.posts.map((post) => {
           let thumbnailUrl = "";
           if (post.attachments) {
@@ -47,12 +46,8 @@ const useFetchBlogs = () => {
         setBlogPosts(fetchedPosts);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+    // eslint-disable-next-line
   }, []);
-
-  // eslint-disable-next-line
-  useEffect(() => {
-    console.log("Fetched -->" + fetchedPosts);
-  }, [fetchedPosts]);
 };
 
 export default useFetchBlogs;

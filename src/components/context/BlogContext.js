@@ -15,6 +15,7 @@ export const BlogProvider = ({ children }) => {
     currentPost: null,
     recipeBlogs: [],
     techniqueBlogs: [],
+    displayBlogs: [],
   });
   const prevBlogPostsRef = useRef();
   useEffect(() => {
@@ -32,6 +33,8 @@ export const BlogProvider = ({ children }) => {
     setBlogState((prevState) => ({ ...prevState, recipeBlogs: post }));
   const setTechniqueBlogs = (post) =>
     setBlogState((prevState) => ({ ...prevState, techniqueBlogs: post }));
+  const setDisplayBlogs = (post) =>
+    setBlogState((prevState) => ({ ...prevState, displayBlogs: post }));
 
   return (
     <BlogContext.Provider
@@ -41,6 +44,7 @@ export const BlogProvider = ({ children }) => {
         setCurrentPost,
         setRecipeBlogs,
         setTechniqueBlogs,
+        setDisplayBlogs,
       }}
     >
       {children}

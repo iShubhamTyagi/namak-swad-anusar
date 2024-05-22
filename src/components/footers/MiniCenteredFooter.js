@@ -39,7 +39,8 @@ export default () => {
           </LogoContainer>
           <LinksContainer>
             <Link href="">About</Link>
-            <Link href="blogs">Blogs</Link>
+            <Link href="recipes">Recipes</Link>
+            <Link href="techniques">Techniques</Link>
           </LinksContainer>
           <SocialLinksContainer>
             <SocialLink href="https://facebook.com">
