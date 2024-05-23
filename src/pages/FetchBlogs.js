@@ -4,6 +4,22 @@ import { useBlog } from "../components/context/BlogContext";
 const useFetchBlogs = () => {
   const { setBlogPosts } = useBlog();
 
+  const decodeHtmlEntities = (str) => {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+  };
+
+  const processPostData = (post) => {
+    const decodedExcerpt = decodeHtmlEntities(post.excerpt || "");
+    const shortExcerpt =
+      decodedExcerpt.length > 100
+        ? decodedExcerpt.substring(3, decodedExcerpt.lastIndexOf(" ", 75)) +
+          "..."
+        : decodedExcerpt;
+    return shortExcerpt;
+  };
+
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts"
@@ -24,13 +40,7 @@ const useFetchBlogs = () => {
             title: post.title,
             url: post.URL,
             attachments: post.attachments,
-            excerpt:
-              post.excerpt.length > 100
-                ? post.excerpt.substring(
-                    3,
-                    post.excerpt.lastIndexOf(" ", 100)
-                  ) + "..."
-                : post.excerpt,
+            excerpt: processPostData(post),
             guid: post.guid,
             modified: new Date(post.modified).toLocaleDateString("en-US", {
               year: "numeric",
