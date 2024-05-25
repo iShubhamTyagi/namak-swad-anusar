@@ -54,6 +54,7 @@ const useFetchBlogs = () => {
           };
         });
         setBlogPosts(fetchedPosts);
+        localStorage.setItem("blogPosts", JSON.stringify(fetchedPosts));
       })
       .catch((error) => console.error("Error fetching posts:", error));
     // eslint-disable-next-line
