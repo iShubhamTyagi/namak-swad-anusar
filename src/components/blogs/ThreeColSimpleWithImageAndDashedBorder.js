@@ -53,7 +53,7 @@ export default ({
   description = "Explore the Essence of Cooking: Dive into Recipes, Master Techniques, and Discover Essential Equipment",
 }) => {
   useFetchBlogs();
-  const { blogState, setCurrentPost } = useBlog();
+  const { blogState } = useBlog();
   const [previewBlogs, setPreviewBlogs] = useState([]);
   const navigate = useNavigate();
 
@@ -68,7 +68,8 @@ export default ({
 
   const handlePostClick = (postId) => {
     console.log("Post clicked --> ", postId);
-    setCurrentPost(postId);
+    //setCurrentPost(postId);
+    localStorage.setItem("currentPostId", JSON.stringify(postId));
     navigate(`/blog/${postId}`);
   };
 

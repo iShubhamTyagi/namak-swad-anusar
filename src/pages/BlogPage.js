@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
 import { useBlog } from "../components/context/BlogContext.js";
 import Header from "../components/headers/light.js";
@@ -15,20 +15,34 @@ function BlogPage() {
   console.log("currentPost", blogState.currentPost);
   console.log("blogPosts", blogState.blogPosts);
 
-  const post = blogState.blogPosts?.find(
-    (post) => post.id === Number(blogState.currentPost)
-  );
+  const [currentPost, setCurrentPost] = useState({});
 
-  if (!post) return <PageContainer>No post found.</PageContainer>;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    let currentId = localStorage.getItem("currentPostId");
+    if (!currentPost || currentPost.id === currentId) return;
+
+    const allBlogs = localStorage.getItem("blogPosts");
+    let post = JSON.parse(allBlogs).find(
+      (post) => post.id === Number(currentId)
+    );
+    setCurrentPost(post);
+    //eslint-disable-next-line
+  }, []);
+
+  if (!currentPost) return <PageContainer>No post found.</PageContainer>;
 
   return (
     <PageContainer>
       <Header />
-      <Title>{post.title}</Title>
-      <Date>{post.modified}</Date>
-      <Category>{post.category}</Category>
+      <Title>{currentPost.title}</Title>
+      <Date>{currentPost.modified}</Date>
+      <Category>{currentPost.category}</Category>
       <ContentContainer
-        dangerouslySetInnerHTML={{ __html: post.content }}
+        dangerouslySetInnerHTML={{ __html: currentPost.content }}
       ></ContentContainer>
     </PageContainer>
   );

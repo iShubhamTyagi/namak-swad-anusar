@@ -102,9 +102,6 @@ import BlogIndexPage from "pages/BlogIndex.js";
 // import TermsOfServicePage from "pages/TermsOfService.js";
 // import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
 
-import ComponentRenderer from "ComponentRenderer.js";
-import ThankYouPage from "ThankYouPage.js";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BlogProvider } from "../src/components/context/BlogContext";
 
@@ -118,15 +115,6 @@ export default function App() {
       <Router>
         <BlogProvider>
           <Routes>
-            <Route
-              path="/components/:type/:subtype/:name"
-              element={<ComponentRenderer />}
-            />
-            <Route
-              path="/components/:type/:name"
-              element={<ComponentRenderer />}
-            />
-            <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/recipes" element={<BlogIndexPage text="Recipes" />} />
             <Route
               path="/techniques"

@@ -61,6 +61,7 @@ export default (props) => {
     setVisible((v) => v + 6);
   };
   const handlePostClick = (postId) => {
+    localStorage.setItem("currentPostId", JSON.stringify(postId));
     setCurrentPost(postId);
   };
   // eslint-disable-next-line
