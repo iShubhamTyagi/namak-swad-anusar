@@ -56,7 +56,7 @@ export default () => {
           <CopyrightText>
             &copy; Copyright 2024, All Rights Reserved.
             <br />
-            1.0.31
+            1.0.32
           </CopyrightText>
         </Row>
       </Content>
