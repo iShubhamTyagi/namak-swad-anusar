@@ -264,13 +264,13 @@ module.exports = {
       DEFAULT: "1",
     },
     fontFamily: {
-      display: ["Kind Avenue", "Inter", "system-ui"],
+      display: ["DMSerifDisplay-Regular", "Inter", "system-ui"],
       sans: [
+        "Roboto",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
         '"Segoe UI"',
-        "Roboto",
         '"Helvetica Neue"',
         "Arial",
         '"Noto Sans"',
@@ -287,6 +287,7 @@ module.exports = {
         '"Times New Roman"',
         "Times",
         "serif",
+        "DMSerifDisplay-Regular",
       ],
       mono: [
         "Menlo",

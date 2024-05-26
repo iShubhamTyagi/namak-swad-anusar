@@ -94,7 +94,7 @@ export default ({
                     </Meta> */}
                     <Meta>
                       <TagIcon />
-                      <div>{post.category}</div>
+                      <div>{post.tags.recipes ? "Recipe" : "Technique"}</div>
                     </Meta>
                   </MetaContainer>
                   <Title>{post.title}</Title>
