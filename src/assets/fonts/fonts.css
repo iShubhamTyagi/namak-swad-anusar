@@ -28,3 +28,16 @@
     font-style: italic;
   }
   
+  @font-face {
+    font-family: 'GeneralSans-Variable';
+    src: url('./GeneralSans-Variable.ttf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'GeneralSans-VariableItalic';
+    src: url('./GeneralSans-VariableItalic.ttf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+  }

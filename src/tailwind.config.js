@@ -266,6 +266,7 @@ module.exports = {
     fontFamily: {
       display: ["DMSerifDisplay-Regular", "Inter", "system-ui"],
       sans: [
+        "GeneralSans-Variable",
         "Roboto",
         "system-ui",
         "-apple-system",
