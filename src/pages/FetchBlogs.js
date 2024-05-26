@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBlog } from "../components/context/BlogContext";
 
 const useFetchBlogs = () => {
   const { setBlogPosts } = useBlog();
+  const [totalPostsCount, setTotalPostsCount] = useState(0);
 
   const decodeHtmlEntities = (str) => {
     const txt = document.createElement("textarea");
@@ -23,6 +24,19 @@ const useFetchBlogs = () => {
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetch trigerred", data);
+        setTotalPostsCount(data.found);
+      })
+      .catch((error) => console.error("Error fetching posts:", error));
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts?number=" +
+        totalPostsCount
     )
       .then((response) => response.json())
       .then((data) => {
@@ -58,7 +72,7 @@ const useFetchBlogs = () => {
       })
       .catch((error) => console.error("Error fetching posts:", error));
     // eslint-disable-next-line
-  }, []);
+  }, [totalPostsCount]);
 };
 
 export default useFetchBlogs;
