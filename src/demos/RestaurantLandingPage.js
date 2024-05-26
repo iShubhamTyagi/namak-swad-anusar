@@ -5,7 +5,7 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Hero from "components/hero/TwoColumnWithFeaturesAndTestimonial";
 import Panel from "components/testimonials/TwoColumnWithImageAndProfilePictureReview.js";
 import HeroImageSrc from "../assets/images/Sourajit.svg";
-import ContactUsForm from "components/forms/SimpleContactUs.js";
+// import ContactUsForm from "components/forms/SimpleContactUs.js";
 import BlogPreview from "components/blogs/ThreeColSimpleWithImageAndDashedBorder.js";
 
 export default () => {
