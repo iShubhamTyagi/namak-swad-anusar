@@ -75,7 +75,7 @@ export default () => {
       /> */}
 
       {<BlogPreview />}
-      {<ContactUsForm />}
+      {/* {<ContactUsForm />} */}
       {/* <MainFeature2
         subheading={<Subheading>A Reputed Brand</Subheading>}
         heading={

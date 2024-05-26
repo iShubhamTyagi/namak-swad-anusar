@@ -29,7 +29,7 @@ const ImageColumn = tw(Column)`ml-auto lg:mr-0 relative mt-16 lg:mt-0 lg:ml-32`;
 // const FeatureIcon = tw(CheckboxIcon)`w-5 h-5 text-primary-500`;
 // const FeatureText = tw.p`ml-2 font-medium text-gray-700`;
 
-const ImageContainer = tw.div`relative z-40 transform xl:-translate-x-24 xl:-translate-y-16`;
+const ImageContainer = tw.div`relative transform xl:-translate-x-24 xl:-translate-y-16`;
 const Image = tw.img`max-w-full w-96 rounded-lg sm:rounded-lg relative z-20 shadow-2xl `;
 // const Offsetbackground = tw.div`absolute inset-0 bg-gray-300 rounded xl:-mb-8`;
 // const ImageDecoratorBlob = styled(SvgDecoratorBlob1)`
