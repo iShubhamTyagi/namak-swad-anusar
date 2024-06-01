@@ -33,6 +33,13 @@ const useFetchBlogs = () => {
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
 
+  function extractFirstImageLink(htmlContent) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, "text/html");
+    const firstImage = doc.querySelector("img");
+    return firstImage ? firstImage.src : null;
+  }
+
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts?number=" +
@@ -43,11 +50,8 @@ const useFetchBlogs = () => {
         console.log("Fetch trigerred", data);
         const fetchedPosts = data.posts.map((post) => {
           let thumbnailUrl = "";
-          if (post.attachments) {
-            const firstAttachment = Object.values(post.attachments)[0];
-            if (firstAttachment && firstAttachment.URL) {
-              thumbnailUrl = firstAttachment.URL;
-            }
+          if (post.content) {
+            thumbnailUrl = extractFirstImageLink(post.content);
           }
           return {
             id: post.ID,

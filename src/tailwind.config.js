@@ -264,7 +264,7 @@ module.exports = {
       DEFAULT: "1",
     },
     fontFamily: {
-      display: ["DMSerifDisplay-Regular", "Inter", "system-ui"],
+      display: ["DMSerifDisplay-Regular", "GeneralSans-Variable", "system-ui"],
       sans: [
         "GeneralSans-Variable",
         "Roboto",
