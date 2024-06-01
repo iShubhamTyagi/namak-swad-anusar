@@ -15,7 +15,7 @@ export default () => {
   const Description = tw.span`inline-block mt-8 font-sans`;
   const imageCss = tw`rounded-4xl`;
   return (
-    <AnimationRevealPage disabled>
+    <AnimationRevealPage>
       <Hero
         heading={
           <>

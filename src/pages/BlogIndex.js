@@ -43,8 +43,8 @@ const Image = styled.div`
   ${tw`h-64 w-full bg-cover bg-center rounded-t-lg`}
 `;
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none`;
-const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
-const CreationDate = tw.div`mt-4 uppercase text-gray-600 italic font-semibold text-xs`;
+//const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
+const CreationDate = tw.div`mt-1 uppercase text-gray-600 italic font-semibold text-xs`;
 const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
 const Description = tw.div``;
 
@@ -83,7 +83,7 @@ export default (props) => {
   }, [props.text, blogState.blogPosts]);
 
   return (
-    <AnimationRevealPage disabled>
+    <AnimationRevealPage>
       <Header />
       <Container>
         <ContentWithPaddingXl>
@@ -104,7 +104,6 @@ export default (props) => {
                   >
                     <Image imageSrc={post.thumbnailUrl} />
                     <Info>
-                      <Category>{post.category}</Category>
                       <CreationDate>{post.modified}</CreationDate>
                       <Title>{post.title}</Title>
                       {post.excerpt && (
