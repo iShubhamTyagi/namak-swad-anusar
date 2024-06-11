@@ -40,6 +40,20 @@ const useFetchBlogs = () => {
     return firstImage ? firstImage.src : null;
   }
 
+  const saveToLocalStorage = (key, value) => {
+    console.log("Saving to local storage", key, value);
+    const data = {
+      timestamp: new Date().toISOString(),
+      value: value,
+    };
+    localStorage.removeItem(key);
+
+    if (key === "blogPosts") {
+      console.log("Saving blogPosts to local storage", data.value);
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+  };
+
   useEffect(() => {
     fetch(
       "https://public-api.wordpress.com/rest/v1.1/sites/namakswadanusar7.wordpress.com/posts?number=" +
@@ -72,7 +86,8 @@ const useFetchBlogs = () => {
           };
         });
         setBlogPosts(fetchedPosts);
-        localStorage.setItem("blogPosts", JSON.stringify(fetchedPosts));
+        saveToLocalStorage("blogPosts", fetchedPosts);
+        //localStorage.setItem("blogPosts", JSON.stringify(fetchedPosts));
       })
       .catch((error) => console.error("Error fetching posts:", error));
     // eslint-disable-next-line
