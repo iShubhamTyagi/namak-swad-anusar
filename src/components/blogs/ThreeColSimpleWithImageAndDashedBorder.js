@@ -66,10 +66,20 @@ export default ({
     }
   }, [blogState.blogPosts]);
 
+  const saveToLocalStorage = (key, value) => {
+    const data = {
+      value,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.removeItem(key);
+    localStorage.setItem(key, JSON.stringify(data));
+  };
+
   const handlePostClick = (postId) => {
     console.log("Post clicked --> ", postId);
     //setCurrentPost(postId);
-    localStorage.setItem("currentPostId", JSON.stringify(postId));
+    saveToLocalStorage("currentPostId", postId);
+    //localStorage.setItem("currentPostId", JSON.stringify(postId));
     navigate(`/blog/${postId}`);
   };
 
